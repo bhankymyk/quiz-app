@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-lg mx-auto bg-gray-100 rounded-3xl mt-5">
+  <div class="max-w-lg mx-auto bg-gray-100 rounded-3xl lg:mt-5">
     <div class="p-6">
       <div class="flex items-center justify-between mb-8">
         <div class="rounded-lg border border-gray-400 pt-1 px-1">
@@ -75,7 +75,7 @@
         Drag the correct Algebraic term below to match the <br />
         definition above.
       </h5>
-      <div class="grid grid-cols-2 gap-4 mb-8 mt-5">
+      <div class="grid grid-cols-3 gap-4 mb-8 mt-5">
         <div
           v-for="(item, index) in items"
           :key="item.id"
@@ -342,21 +342,20 @@ const reloadGame = () => {
   background-color: #f9f9f9;
 }
 
-@media screen and (min-width: 765px) {
+/* @media screen and (min-width: 765px) {
   .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
-}
+} */
 @media screen and (max-width: 425px) {
   .opt {
 
-    width: 150px;
+    width: 100px;
   }
   .qst{
     width: 160px;
     height: 120px;
-    /* background-color: gold; */
   }
 
 }
