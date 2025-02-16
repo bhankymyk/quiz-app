@@ -40,10 +40,10 @@
           class="p-4 rounded-lg transition-colors duration-200 border border-dashed relative qst"
           :class="[
             {
-              'bg-yellow-100': definition.matched,
-              'bg-purple-50 border-purple-300 opacity-50':
+              'bg-yellow-50 border-2': definition.matched,
+              'bg-purple-200 border-purple-300 opacity-50 border-2 border-dashed':
                 !definition.matched && !(isDraggingOver === definition.id),
-              'bg-red-100':
+              'bg-red-100 border-2':
                 (!definition.matched &&
                   isDraggingOver === definition.id &&
                   selectedAnswer !== definition.id) ||
