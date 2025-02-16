@@ -37,7 +37,7 @@
         <div
           v-for="(definition, index) in items"
           :key="definition.id"
-          class="p-4 rounded-lg transition-colors duration-200 border border-dashed relative"
+          class="p-4 rounded-lg transition-colors duration-200 border border-dashed relative qst"
           :class="[
             {
               'bg-yellow-100': definition.matched,
@@ -355,7 +355,10 @@ const reloadGame = () => {
 @media screen and (max-width: 425px) {
   .opt {
 
-    width: 150px;
+    width: 120px;
+  }
+  qst{
+    width: 120px;
   }
 
 }
