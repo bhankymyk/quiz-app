@@ -202,4 +202,12 @@ const capitalizeFirst = (str: string): string => {
   align-items: center;
   background-color: #f9f9f9;
 }
+
+
+
+@media screen and (min-width: 375px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  } 
+}
 </style>
