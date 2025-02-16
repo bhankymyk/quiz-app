@@ -82,7 +82,7 @@
           draggable="true"
           @dragstart="handleDragStart($event, item)"
           @dragend="handleDragEnd"
-          class="py-6 bg-gray-800 text-white rounded-xl text-center cursor-move transition-opacity duration-200"
+          class="py-6 bg-gray-800 text-white rounded-xl text-center cursor-move transition-opacity duration-200 opt"
           :class="[
             { 'opacity-10 text-opacity-50': item.matched },
             index === items.length - 1 && items.length % 2 === 1 ? 'col-span-2 w-1/2 mx-auto' : '',
@@ -229,13 +229,6 @@ onUnmounted(() => {
   }
 })
 
-// const itemsMatched = () => {
-//   toast('All items matched!', {
-//     autoClose: 1000,
-//     position: toast.POSITION.TOP_CENTER,
-//   } as ToastOptions)
-// }
-
 const allMatched = computed(() => items.value.every((item) => item.matched))
 const selectedAnswer = ref<string | null>(null)
 const isDraggingOver = ref<string | null>(null)
@@ -358,5 +351,12 @@ const reloadGame = () => {
   .grido {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
+}
+@media screen and (max-width: 425px) {
+  .opt {
+
+    width: 150px;
+  }
+
 }
 </style>
