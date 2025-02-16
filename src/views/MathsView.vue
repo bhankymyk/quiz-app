@@ -1,30 +1,35 @@
 <template>
   <div class="max-w-lg mx-auto p-6 bg-white rounded-3xl">
     <div class="flex items-center justify-between mb-8">
-      <button class="text-purple-600">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
+<div class="rounded-lg border border-gray-400 pt-1 px-1">
+  <button  @click="goBack" class="">
+    <img src="/src/assets/arrow-back-2.png" class="w-5 h-5 text-green-700" alt="back" />
+  </button>
+</div>
       <h1 class="text-xl font-semibold">Course Preview</h1>
-      <button class="text-purple-600">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-        </svg>
+      <button class="rounded-lg border border-gray-400 py-1 px-1">
+        <img src="/src/assets/question-mark.png" class="w-5 h-5" />
       </button>
     </div>
 
-    <div class="mb-8">
-      <div class="text-sm mb-2">Lesson 1.3</div>
-      <div class="flex gap-1">
-        <div class="h-1 w-7  bg-purple-600 rounded"></div>
-        <div class="h-1  w-7  bg-purple-200 rounded"></div>
-        <div class="h-1 w-7  bg-purple-200 rounded"></div>
-        <div class="h-1 w-7 bg-purple-200 rounded"></div>
+    <div class="flex justify-between">
+
+      <div class="">
+        <div class="text-sm mb-2">Lesson 1.3</div>
+        <div class="flex gap-1">
+          <div class="h-1 w-7  bg-purple-600 rounded"></div>
+          <div class="h-1  w-7  bg-purple-200 rounded"></div>
+          <div class="h-1 w-7  bg-purple-200 rounded"></div>
+          <div class="h-1 w-7 bg-purple-200 rounded"></div>
+        </div>
       </div>
+      <div class="flex justify-between items-center border bg-purple-50 rounded-full p-2 space-x-2">
+  <img src="/src/assets/clock.png" class="w-5 h-5" />
+ <p class=" text-purple-600  text-base font-bold "> {{ formattedTime }} </p>
+</div>
     </div>
 
-    <h2 class="text-xl font-semibold mb-6">Match the Algebraic Terms!</h2>
+    <h2 class="text-xl font-semibold my-6">Match the Algebraic Terms!</h2>
 
 
     <div class="grid gap-4 mb-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
@@ -87,8 +92,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { toast, type ToastOptions } from 'vue3-toastify';
+
 
 interface MatchingItem {
   id: string
@@ -115,6 +122,43 @@ const handleContinueClick = () => {
   }
 }
 
+
+const timeLeft = ref(60)
+const timer = ref<NodeJS.Timeout | null>(null)
+
+const formattedTime = computed(() => {
+  const minutes = Math.floor(timeLeft.value / 60).toString().padStart(2, '0');
+  const seconds = (timeLeft.value % 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
+});
+
+const startTimer = () => {
+  timer.value = setInterval(() => {
+    if (timeLeft.value > 0) {
+      timeLeft.value -= 1
+    } else {
+      clearInterval(timer.value as NodeJS.Timeout)
+      handleTimeUp()
+    }
+  }, 1000)
+}
+
+const handleTimeUp = () => {
+  toast("Time is up !", {
+    autoClose: 1000,
+    position: toast.POSITION.TOP_CENTER,
+  } as ToastOptions);
+}
+
+onMounted(() => {
+  startTimer()
+})
+
+onUnmounted(() => {
+  if (timer.value) {
+    clearInterval(timer.value)
+  }
+})
 const allMatched = computed(() => items.value.every(item => item.matched))
 const selectedAnswer = ref<string | null>(null)
 const isDraggingOver = ref<string | null>(null)
@@ -174,6 +218,12 @@ const handleDrop = (event: DragEvent, definition: MatchingItem) => {
 const capitalizeFirst = (str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
+
+const goBack = () => {
+  router.back()
+}
+
+
 </script>
 
 <style scoped>
@@ -208,6 +258,6 @@ const capitalizeFirst = (str: string): string => {
 @media screen and (min-width: 375px) {
   .grid {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  } 
+  }
 }
 </style>

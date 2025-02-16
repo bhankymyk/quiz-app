@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-xl w-full space-y-8 bg-white p-6 rounded-lg shadow-lg h-screen-">
-      <button @click="goBack" class="p bg-purple-200 text-white rounded-full p-1">
+      <button @click="goBack" class="bg-purple-200 text-white rounded-full p-1">
         <img src="/src/assets/arrow-back.png" class="w-6 h-6" />
       </button>
 
@@ -127,7 +127,6 @@ export default {
   setup() {
 
 
-    // Fisher-Yates shuffle function
     const shuffleQuestions = (questions: Question[]) => {
       for (let i = questions.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -135,7 +134,6 @@ export default {
       }
     }
 
-    // Shuffle questions when the component is mounted
     shuffleQuestions(quizQuestions)
 
     const currentQuestionIndex = ref(0)
