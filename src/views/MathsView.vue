@@ -1,11 +1,11 @@
 <template>
   <div class="max-w-lg mx-auto p-6 bg-white rounded-3xl">
     <div class="flex items-center justify-between mb-8">
-<div class="rounded-lg border border-gray-400 pt-1 px-1">
-  <button  @click="goBack" class="">
-    <img src="/src/assets/arrow-back-2.png" class="w-5 h-5 text-green-700" alt="back" />
-  </button>
-</div>
+      <div class="rounded-lg border border-gray-400 pt-1 px-1">
+        <button @click="goBack" class="">
+          <img src="/src/assets/arrow-back-2.png" class="w-5 h-5 text-green-700" alt="back" />
+        </button>
+      </div>
       <h1 class="text-xl font-semibold">Course Preview</h1>
       <button class="rounded-lg border border-gray-400 py-1 px-1">
         <img src="/src/assets/question-mark.png" class="w-5 h-5" />
@@ -13,24 +13,22 @@
     </div>
 
     <div class="flex justify-between">
-
       <div class="">
         <div class="text-sm mb-2">Lesson 1.3</div>
         <div class="flex gap-1">
-          <div class="h-1 w-7  bg-purple-600 rounded"></div>
-          <div class="h-1  w-7  bg-purple-200 rounded"></div>
-          <div class="h-1 w-7  bg-purple-200 rounded"></div>
+          <div class="h-1 w-7 bg-purple-600 rounded"></div>
+          <div class="h-1 w-7 bg-purple-200 rounded"></div>
+          <div class="h-1 w-7 bg-purple-200 rounded"></div>
           <div class="h-1 w-7 bg-purple-200 rounded"></div>
         </div>
       </div>
       <div class="flex justify-between items-center border bg-purple-50 rounded-full p-2 space-x-2">
-  <img src="/src/assets/clock.png" class="w-5 h-5" />
- <p class=" text-purple-600  text-base font-bold "> {{ formattedTime }} </p>
-</div>
+        <img src="/src/assets/clock.png" class="w-5 h-5" />
+        <p class="text-purple-600 text-base font-bold">{{ formattedTime }}</p>
+      </div>
     </div>
 
     <h2 class="text-xl font-semibold my-6">Match the Algebraic Terms!</h2>
-
 
     <div class="grid gap-4 mb-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
       <div
@@ -39,8 +37,12 @@
         class="p-4 rounded-lg transition-colors duration-200 border border-dashed relative"
         :class="{
           'bg-yellow-100': definition.matched,
-          'bg-purple-50 border-purple-300 opacity-50': !definition.matched && !(isDraggingOver === definition.id),
-          'bg-red-100': !definition.matched && isDraggingOver === definition.id && selectedAnswer !== definition.id,
+          'bg-purple-50 border-purple-300 opacity-50':
+            !definition.matched && !(isDraggingOver === definition.id),
+          'bg-red-100':
+            !definition.matched &&
+            isDraggingOver === definition.id &&
+            selectedAnswer !== definition.id,
           'bg-green-100': definition.matched && definition.isCorrect,
         }"
         @dragover.prevent="handleDragOver($event, definition)"
@@ -49,10 +51,22 @@
       >
         {{ definition.text }}
         <div v-if="definition.matched" class="absolute top-2 right-2">
-          <svg v-if="definition.isCorrect" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+          <svg
+            v-if="definition.isCorrect"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-green-500"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
             <path fill-rule="evenodd" d="M5 10l4 4L15 6" clip-rule="evenodd" />
           </svg>
-          <svg v-else-if="definition.isWrong" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+          <svg
+            v-else-if="definition.isWrong"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 text-red-500"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
             <path fill-rule="evenodd" d="M5 5l10 10M5 15L15 5" clip-rule="evenodd" />
           </svg>
         </div>
@@ -80,22 +94,28 @@
       @click="handleContinueClick"
     >
       Continue
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5 ml-2"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+          clip-rule="evenodd"
+        />
       </svg>
     </button>
 
-    <div v-if="allMatched" class="text-center text-green-500">
-      All items matched!
-    </div>
+    <div v-if="allMatched" class="text-center text-green-500">All items matched!</div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { toast, type ToastOptions } from 'vue3-toastify';
-
+import { toast, type ToastOptions } from 'vue3-toastify'
 
 interface MatchingItem {
   id: string
@@ -111,7 +131,7 @@ const items = ref<MatchingItem[]>([
   { id: 'constant', text: 'A fixed number that does not change', matched: false },
   { id: 'coefficient', text: 'A number that multiplies a variable', matched: false },
   { id: 'expression', text: 'A combination of numbers, variables, and operations', matched: false },
-  { id: 'equation', text: 'A statement that two expressions are equal', matched: false }
+  { id: 'equation', text: 'A statement that two expressions are equal', matched: false },
 ])
 
 const router = useRouter()
@@ -122,15 +142,16 @@ const handleContinueClick = () => {
   }
 }
 
-
 const timeLeft = ref(60)
 const timer = ref<NodeJS.Timeout | null>(null)
 
 const formattedTime = computed(() => {
-  const minutes = Math.floor(timeLeft.value / 60).toString().padStart(2, '0');
-  const seconds = (timeLeft.value % 60).toString().padStart(2, '0');
-  return `${minutes}:${seconds}`;
-});
+  const minutes = Math.floor(timeLeft.value / 60)
+    .toString()
+    .padStart(2, '0')
+  const seconds = (timeLeft.value % 60).toString().padStart(2, '0')
+  return `${minutes}:${seconds}`
+})
 
 const startTimer = () => {
   timer.value = setInterval(() => {
@@ -144,10 +165,10 @@ const startTimer = () => {
 }
 
 const handleTimeUp = () => {
-  toast("Time is up !", {
+  toast('Time is up !', {
     autoClose: 1000,
     position: toast.POSITION.TOP_CENTER,
-  } as ToastOptions);
+  } as ToastOptions)
 }
 
 onMounted(() => {
@@ -159,7 +180,7 @@ onUnmounted(() => {
     clearInterval(timer.value)
   }
 })
-const allMatched = computed(() => items.value.every(item => item.matched))
+const allMatched = computed(() => items.value.every((item) => item.matched))
 const selectedAnswer = ref<string | null>(null)
 const isDraggingOver = ref<string | null>(null)
 
@@ -195,7 +216,7 @@ const handleDrop = (event: DragEvent, definition: MatchingItem) => {
   }
 
   if (itemId) {
-    const droppedItem = items.value.find(item => item.id === itemId)
+    const droppedItem = items.value.find((item) => item.id === itemId)
     if (droppedItem) {
       if (definition.id === itemId) {
         droppedItem.matched = true
@@ -222,8 +243,6 @@ const capitalizeFirst = (str: string): string => {
 const goBack = () => {
   router.back()
 }
-
-
 </script>
 
 <style scoped>
@@ -252,8 +271,6 @@ const goBack = () => {
   align-items: center;
   background-color: #f9f9f9;
 }
-
-
 
 @media screen and (min-width: 375px) {
   .grid {

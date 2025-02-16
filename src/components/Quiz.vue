@@ -38,12 +38,22 @@
             >
               {{ String.fromCharCode(65 + index) }}. {{ option }}
               <span v-if="answerStatus === 'correct' && selectedOption === option">
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" style="fill: #40c057">
-                  <path d="M 12 2 C 6.486 2 2 6.486 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 C 22 10.874 21.803984 9.7942031 21.458984 8.7832031 L 19.839844 10.402344 C 19.944844 10.918344 20 11.453 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 7.589 7.589 4 12 4 C 13.633 4 15.151922 4.4938906 16.419922 5.3378906 L 17.851562 3.90625 C 16.203562 2.71225 14.185 2 12 2 z M 21.292969 3.2929688 L 11 13.585938 L 7.7070312 10.292969 L 6.2929688 11.707031 L 11 16.414062 L 22.707031 4.7070312 L 21.292969 3.2929688 z"></path>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  style="fill: #40c057"
+                >
+                  <path
+                    d="M 12 2 C 6.486 2 2 6.486 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 C 22 10.874 21.803984 9.7942031 21.458984 8.7832031 L 19.839844 10.402344 C 19.944844 10.918344 20 11.453 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 7.589 7.589 4 12 4 C 13.633 4 15.151922 4.4938906 16.419922 5.3378906 L 17.851562 3.90625 C 16.203562 2.71225 14.185 2 12 2 z M 21.292969 3.2929688 L 11 13.585938 L 7.7070312 10.292969 L 6.2929688 11.707031 L 11 16.414062 L 22.707031 4.7070312 L 21.292969 3.2929688 z"
+                  ></path>
                 </svg>
               </span>
 
-              <span v-if="answerStatus === 'incorrect' && selectedOption === option"  class="">
+              <span v-if="answerStatus === 'incorrect' && selectedOption === option" class="">
                 <img src="/src/assets/error.png" />
               </span>
             </button>
@@ -53,12 +63,14 @@
         <div v-else class="text-center text-xl font-bold">
           <p>You've completed the quiz!</p>
           <p>Your score: {{ score }} / {{ quizQuestions.length }}</p>
-            <div class="mt-5">
-              <p class="font-bold text-lg">{{ congratMessage }}</p>
-            </div>
+          <div class="mt-5">
+            <p class="font-bold text-lg">{{ congratMessage }}</p>
+          </div>
 
           <div class="mt-10">
-            <router-link to="/maths" class="text-blue-500 text-base">Click here to try the drag and drop Arithemetic</router-link>
+            <router-link to="/maths" class="text-blue-500 text-base"
+              >Click here to try the drag and drop Arithemetic</router-link
+            >
             <p>or</p>
             <router-link to="/" class="text-blue-500 text-base">Try the quiz again</router-link>
           </div>
@@ -83,24 +95,23 @@
               '': answerStatus !== 'correct' && answerStatus !== 'incorrect',
             }"
           >
-          <div class="flex">
+            <div class="flex">
+              <img
+                v-if="answerStatus === 'incorrect'"
+                src="/src/assets/error.png"
+                class="w-6 h-6 mr-2"
+              />
+              <img
+                v-if="answerStatus === 'correct'"
+                src="/src/assets/correct.png"
+                class="w-6 h-6 mr-2"
+              />
 
-            <img
-            v-if="answerStatus === 'incorrect'"
-            src="/src/assets/error.png"
-            class="w-6 h-6 mr-2"
-            />
-            <img
-            v-if="answerStatus === 'correct'"
-            src="/src/assets/correct.png"
-            class="w-6 h-6 mr-2"
-            />
-
-            <span>{{ answerMessage }}</span>
-          </div>
+              <span>{{ answerMessage }}</span>
+            </div>
             <!-- Show clue if incorrect -->
             <h4 v-if="answerStatus === 'incorrect'" class="block text-red-400 ml-8">
-             {{ currentQuestion.clue }}
+              {{ currentQuestion.clue }}
             </h4>
           </div>
         </div>
@@ -114,23 +125,21 @@ import { ref, computed } from 'vue'
 import { quizQuestions } from '../utils/Data'
 
 interface Question {
-  id: number;
-  question: string;
-  options: string[];
-  correctAnswer: string;
-  explanation: string;
-  clue: string;
+  id: number
+  question: string
+  options: string[]
+  correctAnswer: string
+  explanation: string
+  clue: string
 }
 
 export default {
   name: 'QuizComponent',
   setup() {
-
-
     const shuffleQuestions = (questions: Question[]) => {
       for (let i = questions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [questions[i], questions[j]] = [questions[j], questions[i]];
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[questions[i], questions[j]] = [questions[j], questions[i]]
       }
     }
 
@@ -196,7 +205,7 @@ export default {
       goBack,
       congratMessage,
     }
-  }
+  },
 }
 </script>
 
