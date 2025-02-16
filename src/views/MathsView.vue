@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-lg mx-auto bg-gray-100 rounded-3xl">
+  <div class="max-w-lg mx-auto bg-gray-100 rounded-3xl mt-5">
     <div class="p-6">
       <div class="flex items-center justify-between mb-8">
         <div class="rounded-lg border border-gray-400 pt-1 px-1">
@@ -33,15 +33,15 @@
 
       <h2 class="text-xl font-semibold my-6">Match the Algebraic Terms!</h2>
 
-      <div class="grid gap-4 mb-8 grid-cols-2">
+      <div class="grid gap-4 mb-8 lg:grid-cols-2">
         <div
           v-for="(definition, index) in items"
           :key="definition.id"
-          class="p-4 rounded-lg transition-colors duration-200 border border-dashed relative qst"
+          class="p-4 rounded-lg transition-colors duration-200 border border-dashed relative"
           :class="[
             {
               'bg-yellow-50 border-2': definition.matched,
-              'bg-purple-200 border-purple-300 opacity-50 border-2 border-dashed':
+              'bg-purple-200 border-purple-300 opacity-50 border-2 border-dashed qst':
                 !definition.matched && !(isDraggingOver === definition.id),
               'bg-red-100 border-2':
                 (!definition.matched &&
@@ -189,7 +189,7 @@ const itemsMatched = () => {
   } as ToastOptions)
 }
 
-const timeLeft = ref(120)
+const timeLeft = ref(290)
 const timer = ref<ReturnType<typeof setInterval> | null>(null)
 
 const formattedTime = computed(() => {
@@ -329,36 +329,34 @@ const reloadGame = () => {
   position: absolute;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-}
-
 .cursor-move {
   cursor: move;
 }
 
 .drop-area {
   border: 2px dashed #ccc;
-  min-height: 80px;
+  /* min-height: 80px; */
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f9f9f9;
 }
 
-@media screen and (min-width: 375px) {
-  .grido {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
+@media screen and (min-width: 765px) {
+  .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
 }
 @media screen and (max-width: 425px) {
   .opt {
 
-    width: 120px;
+    width: 150px;
   }
-  qst{
-    width: 120px;
+  .qst{
+    width: 160px;
+    height: 120px;
+    /* background-color: gold; */
   }
 
 }
