@@ -58,7 +58,7 @@
             </div>
 
           <div class="mt-10">
-            <router-link to="/about" class="text-blue-500 text-base">Click here to try the drag and drop Arithemetic</router-link>
+            <router-link to="/maths" class="text-blue-500 text-base">Click here to try the drag and drop Arithemetic</router-link>
             <p>or</p>
             <router-link to="/" class="text-blue-500 text-base">Try the quiz again</router-link>
           </div>
