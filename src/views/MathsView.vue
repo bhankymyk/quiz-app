@@ -143,7 +143,7 @@ const handleContinueClick = () => {
 }
 
 const timeLeft = ref(60)
-const timer = ref<NodeJS.Timeout | null>(null)
+const timer = ref<ReturnType<typeof setInterval> | null>(null)
 
 const formattedTime = computed(() => {
   const minutes = Math.floor(timeLeft.value / 60)
@@ -158,7 +158,7 @@ const startTimer = () => {
     if (timeLeft.value > 0) {
       timeLeft.value -= 1
     } else {
-      clearInterval(timer.value as NodeJS.Timeout)
+      clearInterval(timer.value as ReturnType<typeof setInterval>)
       handleTimeUp()
     }
   }, 1000)
