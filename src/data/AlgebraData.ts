@@ -5,6 +5,8 @@ interface MatchingItem {
   text: string;
   originalText: string;
   matched: boolean;
+  isCorrect?: boolean;
+  isWrong?: boolean;
 }
 
 export const items = ref<MatchingItem[]>([

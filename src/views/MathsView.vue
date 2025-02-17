@@ -133,10 +133,10 @@ import {items }from '../data/AlgebraData'
 
 interface MatchingItem {
   isCorrect?: boolean
-  isWrong?: boolean
   id: string
   text: string
   matched: boolean
+  isWrong?: boolean
   droppedItems?: MatchingItem[]
   originalText?: string
 }
