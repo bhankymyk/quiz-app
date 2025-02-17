@@ -132,11 +132,11 @@ import { toast, type ToastOptions } from 'vue3-toastify'
 import {items }from '../data/AlgebraData'
 
 interface MatchingItem {
+  isCorrect?: boolean
+  isWrong?: boolean
   id: string
   text: string
   matched: boolean
-  isCorrect?: boolean
-  isWrong?: boolean
   droppedItems?: MatchingItem[]
   originalText?: string
 }
