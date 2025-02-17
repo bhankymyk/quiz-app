@@ -2,7 +2,7 @@
   <div class="min-h-screen flex justify-center mt-1 bg-gray-100 shadow-md">
     <div class="w-full space-y-8 bg-white p-6 rounded-lg shadow-lg h-screen-">
       <button @click="goBack" class="bg-purple-200 text-white rounded-full p-1">
-        <img src="/src/assets/arrow-back.png" class="w-6 h-6" />
+        <img src="/src/assets/icons/arrow-back.png" class="w-6 h-6" />
       </button>
 
       <!-- Header -->
@@ -54,7 +54,7 @@
               </span>
 
               <span v-if="answerStatus === 'incorrect' && selectedOption === option" class="">
-                <img src="/src/assets/error.png" />
+                <img src="/src/assets/icons/error.png" />
               </span>
             </button>
           </div>
@@ -98,12 +98,12 @@
             <div class="flex">
               <img
                 v-if="answerStatus === 'incorrect'"
-                src="/src/assets/error.png"
+                src="/src/assets/icons/error.png"
                 class="w-6 h-6 mr-2"
               />
               <img
                 v-if="answerStatus === 'correct'"
-                src="/src/assets/correct.png"
+                src="/src/assets/icons/correct.png"
                 class="w-6 h-6 mr-2"
               />
 
@@ -122,7 +122,7 @@
 
 <script lang="ts">
 import { ref, computed } from 'vue'
-import { quizQuestions } from '../utils/Data'
+import {quizQuestions} from '../data/QuizData'
 
 interface Question {
   id: number

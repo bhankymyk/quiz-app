@@ -11,17 +11,11 @@ const router = createRouter({
     {
       path: '/maths',
       name: 'maths',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/MathsView.vue'),
     },
     {
       path: '/success',
       name: 'success',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/SuccessView.vue'),
     },
   ],

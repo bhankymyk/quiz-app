@@ -4,12 +4,12 @@
       <div class="flex items-center justify-between mb-8">
         <div class="rounded-lg border border-gray-400 pt-1 px-1">
           <button @click="goBack" class="">
-            <img src="/src/assets/arrow-back-2.png" class="w-5 h-5 text-green-700" alt="back" />
+            <img src="/src/assets/icons/arrow-back-2.png" class="w-5 h-5 text-green-700" alt="back" />
           </button>
         </div>
         <h1 class="text-xl font-semibold">Course Preview</h1>
         <button class="rounded-lg border border-gray-400 py-1 px-1">
-          <img src="/src/assets/question-mark.png" class="w-5 h-5" />
+          <img src="/src/assets/icons/question-mark.png" class="w-5 h-5" />
         </button>
       </div>
 
@@ -26,7 +26,7 @@
         <div
           class="flex justify-between items-center border bg-purple-50 rounded-full p-2 space-x-2"
         >
-          <img src="/src/assets/clock.png" class="w-5 h-5" />
+          <img src="/src/assets/icons/clock.png" class="w-5 h-5" />
           <p class="text-purple-600 text-base font-bold">{{ formattedTime }}</p>
         </div>
       </div>
@@ -59,11 +59,11 @@
           {{ definition.text }}
           <div v-if="definition.matched  || definition.isWrong" class="absolute top-6 right-2">
             <div class="" v-if="definition.isCorrect">
-              <img src="/src/assets/checked.png" class="w-5 h-5" />
+              <img src="/src/assets/icons/checked.png" class="w-5 h-5" />
             </div>
 
             <div class="div" v-if="definition.isWrong">
-              <img src="/src/assets/checkedwrong.png" class="w-5 h-5" />
+              <img src="/src/assets/icons/checkedwrong.png" class="w-5 h-5" />
             </div>
           </div>
         </div>
@@ -95,7 +95,7 @@
       <div class="flex justify-between">
         <div class="flex items-center rounded-xl p-3 px-5 border border-gray-400 mr-10">
           <button @click="reloadGame">
-            <img src="/src/assets/refresh.svg" class="w-8 h-8 text-purple-800" alt="reload" />
+            <img src="/src/assets/icons/refresh.svg" class="w-8 h-8 text-purple-800" alt="reload" />
           </button>
         </div>
 
@@ -129,6 +129,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { toast, type ToastOptions } from 'vue3-toastify'
+import {items }from '../data/AlgebraData'
 
 interface MatchingItem {
   id: string
@@ -140,38 +141,6 @@ interface MatchingItem {
   originalText?: string
 }
 
-const items = ref<MatchingItem[]>([
-  {
-    id: 'variable',
-    text: 'A letter or symbol that represents a value',
-    originalText: 'A letter or symbol that represents a value',
-    matched: false,
-  },
-  {
-    id: 'constant',
-    text: 'A fixed number that does not change',
-    originalText: 'A fixed number that does not change',
-    matched: false,
-  },
-  {
-    id: 'coefficient',
-    text: 'A number that multiplies a variable',
-    originalText: 'A number that multiplies a variable',
-    matched: false,
-  },
-  {
-    id: 'expression',
-    text: 'A combination of numbers, variables, and operations',
-    originalText: 'A combination of numbers, variables, and operations',
-    matched: false,
-  },
-  {
-    id: 'equation',
-    text: 'A statement that two expressions are equal',
-    originalText: 'A statement that two expressions are equal',
-    matched: false,
-  },
-])
 
 const router = useRouter()
 const handleContinueClick = () => {
