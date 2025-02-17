@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-lg mx-auto bg-gray-100 rounded-3xl lg:mt-5">
+  <div class="mt-1 bg-gray-100 rounded-3xl">
     <div class="p-6">
       <div class="flex items-center justify-between mb-8">
         <div class="rounded-lg border border-gray-400 pt-1 px-1">
@@ -57,7 +57,7 @@
           @drop="handleDrop($event, definition)"
         >
           {{ definition.text }}
-          <div v-if="definition.matched" class="absolute top-6 right-2">
+          <div v-if="definition.matched  || definition.isWrong" class="absolute top-6 right-2">
             <div class="" v-if="definition.isCorrect">
               <img src="/src/assets/checked.png" class="w-5 h-5" />
             </div>
@@ -85,7 +85,7 @@
           class="py-6 bg-gray-800 text-white rounded-xl text-center cursor-move transition-opacity duration-200 opt"
           :class="[
             { 'opacity-10 text-opacity-50': item.matched },
-            index === items.length - 1 && items.length % 2 === 1 ? 'col-span-2 w-1/2 mx-auto' : '',
+            index === items.length - 2 && items.length % 3 === 2 ? 'col-span-2 w-1/2 mx-auto' : '',
           ]"
         >
           {{ capitalizeFirst(item.id) }}
@@ -120,7 +120,6 @@
           </svg>
         </button>
 
-        <!-- <div v-if="allMatched" class="">All items matched!</div> -->
       </div>
     </div>
   </div>
@@ -177,7 +176,7 @@ const items = ref<MatchingItem[]>([
 const router = useRouter()
 const handleContinueClick = () => {
   if (allMatched.value) {
-    router.push('/')
+    router.push('/success')
   } else {
   }
 }
@@ -189,7 +188,7 @@ const itemsMatched = () => {
   } as ToastOptions)
 }
 
-const timeLeft = ref(290)
+const timeLeft = ref(120)
 const timer = ref<ReturnType<typeof setInterval> | null>(null)
 
 const formattedTime = computed(() => {
@@ -269,16 +268,13 @@ const handleDrop = (event: DragEvent, definition: MatchingItem) => {
     if (droppedItem) {
       if (definition.id === itemId) {
         droppedItem.matched = true
-        droppedItem.isCorrect = true
-        droppedItem.isWrong = false
-
-        definition.text = capitalizeFirst(itemId)
+        definition.isCorrect = true
+        definition.isWrong = false
+        definition.text = capitalizeFirst(droppedItem.id)
       } else {
+        definition.isWrong = true
+        definition.text = capitalizeFirst(droppedItem.id)
         droppedItem.matched = false
-        droppedItem.isCorrect = false
-        droppedItem.isWrong = true
-
-        definition.text = capitalizeFirst(itemId)
       }
 
       definition.droppedItems = definition.droppedItems || []
@@ -333,21 +329,6 @@ const reloadGame = () => {
   cursor: move;
 }
 
-.drop-area {
-  border: 2px dashed #ccc;
-  /* min-height: 80px; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f9f9f9;
-}
-
-/* @media screen and (min-width: 765px) {
-  .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-}
-} */
 @media screen and (max-width: 425px) {
   .opt {
 

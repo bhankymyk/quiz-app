@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen flex justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-xl w-full space-y-8 bg-white p-6 rounded-lg shadow-lg h-screen-">
+  <div class="min-h-screen flex justify-center mt-1 bg-gray-100 shadow-md">
+    <div class="w-full space-y-8 bg-white p-6 rounded-lg shadow-lg h-screen-">
       <button @click="goBack" class="bg-purple-200 text-white rounded-full p-1">
         <img src="/src/assets/arrow-back.png" class="w-6 h-6" />
       </button>
@@ -69,7 +69,7 @@
 
           <div class="mt-10">
             <router-link to="/maths" class="text-blue-500 text-base"
-              >Click here to try the drag and drop Arithemetic</router-link
+              >Click here to try the Drag and Drop Arithemetic</router-link
             >
             <p>or</p>
             <router-link to="/" class="text-blue-500 text-base">Try the quiz again</router-link>
